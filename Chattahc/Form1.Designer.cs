@@ -35,12 +35,13 @@
             this.bt_chatreq = new System.Windows.Forms.Button();
             this.bt_chatsend = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.tb_chatsend = new System.Windows.Forms.TextBox();
             this.lb_chatreq = new System.Windows.Forms.Label();
             this.lb_chat = new System.Windows.Forms.Label();
             this.lb_chatlist = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.tb_chat = new System.Windows.Forms.TextBox();
             this.button3 = new System.Windows.Forms.Button();
+            this.lb_myid = new System.Windows.Forms.Label();
             this.pn_chatreq.SuspendLayout();
             this.pn_chat.SuspendLayout();
             this.pn_chatlist.SuspendLayout();
@@ -52,34 +53,34 @@
             this.pn_chatreq.Controls.Add(this.lb_chatreq);
             this.pn_chatreq.Controls.Add(this.textBox1);
             this.pn_chatreq.Controls.Add(this.bt_chatreq);
-            this.pn_chatreq.Location = new System.Drawing.Point(7, 5);
+            this.pn_chatreq.Location = new System.Drawing.Point(4, 23);
             this.pn_chatreq.Name = "pn_chatreq";
             this.pn_chatreq.Size = new System.Drawing.Size(219, 47);
             this.pn_chatreq.TabIndex = 0;
             // 
             // pn_chat
             // 
-            this.pn_chat.Controls.Add(this.textBox3);
+            this.pn_chat.Controls.Add(this.tb_chat);
             this.pn_chat.Controls.Add(this.lb_chat);
-            this.pn_chat.Location = new System.Drawing.Point(232, 5);
+            this.pn_chat.Location = new System.Drawing.Point(229, 5);
             this.pn_chat.Name = "pn_chat";
-            this.pn_chat.Size = new System.Drawing.Size(312, 486);
+            this.pn_chat.Size = new System.Drawing.Size(312, 504);
             this.pn_chat.TabIndex = 1;
             // 
             // pn_chatlist
             // 
             this.pn_chatlist.Controls.Add(this.button3);
             this.pn_chatlist.Controls.Add(this.lb_chatlist);
-            this.pn_chatlist.Location = new System.Drawing.Point(7, 58);
+            this.pn_chatlist.Location = new System.Drawing.Point(4, 76);
             this.pn_chatlist.Name = "pn_chatlist";
             this.pn_chatlist.Size = new System.Drawing.Size(219, 484);
             this.pn_chatlist.TabIndex = 2;
             // 
             // pn_chatsend
             // 
-            this.pn_chatsend.Controls.Add(this.textBox2);
+            this.pn_chatsend.Controls.Add(this.tb_chatsend);
             this.pn_chatsend.Controls.Add(this.bt_chatsend);
-            this.pn_chatsend.Location = new System.Drawing.Point(232, 497);
+            this.pn_chatsend.Location = new System.Drawing.Point(229, 515);
             this.pn_chatsend.Name = "pn_chatsend";
             this.pn_chatsend.Size = new System.Drawing.Size(312, 45);
             this.pn_chatsend.TabIndex = 3;
@@ -96,7 +97,7 @@
             // 
             // bt_chatsend
             // 
-            this.bt_chatsend.Location = new System.Drawing.Point(258, 4);
+            this.bt_chatsend.Location = new System.Drawing.Point(262, 4);
             this.bt_chatsend.Name = "bt_chatsend";
             this.bt_chatsend.Size = new System.Drawing.Size(51, 34);
             this.bt_chatsend.TabIndex = 0;
@@ -106,23 +107,23 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(5, 20);
+            this.textBox1.Location = new System.Drawing.Point(9, 20);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(156, 21);
             this.textBox1.TabIndex = 1;
             // 
-            // textBox2
+            // tb_chatsend
             // 
-            this.textBox2.Location = new System.Drawing.Point(5, 4);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(249, 34);
-            this.textBox2.TabIndex = 1;
+            this.tb_chatsend.Location = new System.Drawing.Point(9, 4);
+            this.tb_chatsend.Multiline = true;
+            this.tb_chatsend.Name = "tb_chatsend";
+            this.tb_chatsend.Size = new System.Drawing.Size(249, 34);
+            this.tb_chatsend.TabIndex = 1;
             // 
             // lb_chatreq
             // 
             this.lb_chatreq.AutoSize = true;
-            this.lb_chatreq.Location = new System.Drawing.Point(5, 4);
+            this.lb_chatreq.Location = new System.Drawing.Point(9, 4);
             this.lb_chatreq.Name = "lb_chatreq";
             this.lb_chatreq.Size = new System.Drawing.Size(81, 12);
             this.lb_chatreq.TabIndex = 0;
@@ -131,7 +132,7 @@
             // lb_chat
             // 
             this.lb_chat.AutoSize = true;
-            this.lb_chat.Location = new System.Drawing.Point(134, 5);
+            this.lb_chat.Location = new System.Drawing.Point(138, 5);
             this.lb_chat.Name = "lb_chat";
             this.lb_chat.Size = new System.Drawing.Size(41, 12);
             this.lb_chat.TabIndex = 0;
@@ -140,23 +141,23 @@
             // lb_chatlist
             // 
             this.lb_chatlist.AutoSize = true;
-            this.lb_chatlist.Location = new System.Drawing.Point(5, 5);
+            this.lb_chatlist.Location = new System.Drawing.Point(9, 5);
             this.lb_chatlist.Name = "lb_chatlist";
             this.lb_chatlist.Size = new System.Drawing.Size(55, 12);
             this.lb_chatlist.TabIndex = 0;
             this.lb_chatlist.Text = "Chat List";
             // 
-            // textBox3
+            // tb_chat
             // 
-            this.textBox3.Location = new System.Drawing.Point(5, 20);
-            this.textBox3.Multiline = true;
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(300, 459);
-            this.textBox3.TabIndex = 1;
+            this.tb_chat.Location = new System.Drawing.Point(9, 20);
+            this.tb_chat.Multiline = true;
+            this.tb_chat.Name = "tb_chat";
+            this.tb_chat.Size = new System.Drawing.Size(300, 459);
+            this.tb_chat.TabIndex = 1;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(7, 21);
+            this.button3.Location = new System.Drawing.Point(3, 20);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(209, 23);
             this.button3.TabIndex = 1;
@@ -164,11 +165,21 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.UseWaitCursor = true;
             // 
+            // lb_myid
+            // 
+            this.lb_myid.AutoSize = true;
+            this.lb_myid.Location = new System.Drawing.Point(4, 5);
+            this.lb_myid.Name = "lb_myid";
+            this.lb_myid.Size = new System.Drawing.Size(39, 12);
+            this.lb_myid.TabIndex = 4;
+            this.lb_myid.Text = "MY ID";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 554);
+            this.ClientSize = new System.Drawing.Size(549, 568);
+            this.Controls.Add(this.lb_myid);
             this.Controls.Add(this.pn_chatsend);
             this.Controls.Add(this.pn_chatlist);
             this.Controls.Add(this.pn_chat);
@@ -184,6 +195,7 @@
             this.pn_chatsend.ResumeLayout(false);
             this.pn_chatsend.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -195,13 +207,14 @@
         private System.Windows.Forms.Panel pn_chat;
         private System.Windows.Forms.Panel pn_chatlist;
         private System.Windows.Forms.Panel pn_chatsend;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox tb_chatsend;
         private System.Windows.Forms.Button bt_chatsend;
         private System.Windows.Forms.Label lb_chatreq;
         private System.Windows.Forms.Label lb_chat;
         private System.Windows.Forms.Label lb_chatlist;
-        private System.Windows.Forms.TextBox textBox3;
+        private System.Windows.Forms.TextBox tb_chat;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label lb_myid;
     }
 }
 

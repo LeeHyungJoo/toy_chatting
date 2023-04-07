@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StackExchange.Redis;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,6 +12,10 @@ namespace Chattahc
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
+
+
+        public static ConnectionMultiplexer redis = ConnectionMultiplexer.Connect("127.0.0.1:6379");
+
         [STAThread]
         static void Main()
         {
