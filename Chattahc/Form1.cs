@@ -31,6 +31,14 @@ namespace Chattahc
             InitializeComponent();
             lb_myid.Text = Program.chat_id + " - Chatting room";
 
+            foreach (var mem in redis.SetMembers(Program.chat_id))
+            {
+                var key = mem.ToString();
+                var idx = key.LastIndexOf('+');
+
+                chatRoomDict.Add(key, new ChatRoom() { name = key.Substring(0, idx) });
+            }
+
             timer.Interval = 250;
             timer.Tick += Update;
             timer.Start();
@@ -54,9 +62,9 @@ namespace Chattahc
                     btns.Last().Click += new EventHandler(bt_chatroom_Click);
                     chatRoomBtnDict.Add(room.Key, btns.Last());
                 }
+
                 flp_chatlist.Controls.AddRange(btns.ToArray());
             }
-
 
         }
 
@@ -67,10 +75,12 @@ namespace Chattahc
 
             var roomName = txtbox_makeroom.Text;
             var roomKey = roomName + "+" + Util.GetTimeStampMS().ToString();
-            var roomNameKey = new RedisKey("CHATROOM:" + roomName);
+            var roomNameKey = new RedisKey("CHATROOM:" + roomKey);
 
             redis.StringSet(roomNameKey, new RedisValue("-"));
             chatRoomDict.Add(roomKey, new ChatRoom() { name = roomName });
+
+            redis.SetAdd(Program.chat_id, new RedisValue(roomKey));
         }
 
         private void button2_Click(object sender, EventArgs e)
