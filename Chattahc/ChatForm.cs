@@ -22,13 +22,13 @@ namespace Chattahc
         public ChatForm()
         {
             InitializeComponent();
-            lb_myid.Text = Program.chat_id + " - Chatting room";
+            lb_myid.Text = Program.chatId + " - Chatting room";
 
             timer.Interval = 250;
             timer.Tick += Update;
             timer.Start();
 
-            chatManager.Init(Program.chat_id);
+            chatManager.Init(Program.chatId);
         }
 
         public bool CheckRoomListUpdate()
@@ -38,7 +38,7 @@ namespace Chattahc
 
         public bool ChatContextEnabled()
         {
-            return chatManager.CurrentChatRoomKey != string.Empty;
+            return !string.IsNullOrEmpty(chatManager.CurrentChatRoomKey);
         }
 
         public void Update(object sender, EventArgs e)
@@ -75,6 +75,7 @@ namespace Chattahc
         {
             if (sender is Button chatBtn)
             {
+                chatManager.CurrentChatRoomKey = chatBtn.Name;
                 //주고받은 대화 가져오기. 
             }
         }
@@ -88,14 +89,11 @@ namespace Chattahc
         private void stripmenu_member_invite_Click(object sender, EventArgs e)
         {
             //TODO : 새로운 Dialog 를 통해서, 특정 Id 탐색 후 추가 해야함. 
-
-
-
+            //TEST
+            chatManager.InviteToRoom("Yaral2");
+            chatManager.InviteToRoom("Yaral3");
+            chatManager.InviteToRoom("Yaral4");
         }
 
-        public void InviteMemeber(string memberID)
-        {
-
-        }
     }
 }

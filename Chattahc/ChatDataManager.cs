@@ -15,7 +15,7 @@ namespace Chattahc
         public IDatabase redis = Program.connection.GetDatabase();
         public Dictionary<string, ChatRoom> chatRoomDict = new Dictionary<string, ChatRoom>();
 
-        public string CurrentChatRoomKey { get; private set; }
+        public string CurrentChatRoomKey { get; set; }
 
         public int RoomCount()
         {
@@ -24,13 +24,10 @@ namespace Chattahc
 
         public void Init(string userChatId)
         {
-            var binSerializer = new BinaryFormatter();
             foreach (var mem in redis.SetMembers(userChatId))
             {
                 var roomKey = mem.ToString();
-                var roomData = Util.Deserialize<ChatRoom>(redis.StringGet(Util.GenerateChatRoomRedisKey(roomKey)));
-
-                if (roomData is ChatRoom chatRoomData)
+                if (Util.Deserialize<ChatRoom>(redis.StringGet(Util.GenerateChatRoomRedisKey(roomKey))) is ChatRoom chatRoomData)
                 {
                     chatRoomDict.Add(roomKey, chatRoomData);
                 }
@@ -38,20 +35,19 @@ namespace Chattahc
                 {
                     Console.WriteLine("Parsing Failed");
                 }
-
             }
         }
 
 
         public void MakeRoom(string roomName)
         {
-            var roomKey = roomName + "+" + Util.GetTimeStampMS().ToString();
+            var roomKey = $"{roomName}+{Util.GetTimeStampMS()}";
 
-            var roomData = new ChatRoom() { name = roomKey, memberIdList = new List<string>() { Program.chat_id } };
+            var roomData = new ChatRoom() { name = roomKey, memberIdSet = new HashSet<string>() { Program.chatId } };
             chatRoomDict.Add(roomKey, roomData);
 
             redis.StringSet(Util.GenerateChatRoomRedisKey(roomKey), new RedisValue(Util.Serialize(roomData)));
-            redis.SetAdd(Program.chat_id, new RedisValue(roomKey));
+            redis.SetAdd(Program.chatId, new RedisValue(roomKey));
         }
 
         public List<Button> GetToAddChatRoomBtns(List<string> btnRoomkeyList, EventHandler btnEventHandler)
@@ -73,12 +69,31 @@ namespace Chattahc
                 btn.Click += btnEventHandler;
                 toAddBtnList.Add(btn);
             }
-
             return toAddBtnList;
         }
 
 
+        public void InviteToRoom(string targetChatId)
+        {
+            if (string.IsNullOrEmpty(CurrentChatRoomKey))
+            {
+                return;
+            }
+
+            if (!chatRoomDict.TryGetValue(CurrentChatRoomKey, out var room))
+            {
+                return;
+            }
+
+            var result = redis.StringGet($"CHATID:{targetChatId}");
+            if (result == RedisValue.Null)
+            {
+                return;
+            }
+
+
+            room.memberIdSet.Add(targetChatId);
+            redis.SetAdd(targetChatId, new RedisValue(room.name));
+        }
     }
-
-
 }

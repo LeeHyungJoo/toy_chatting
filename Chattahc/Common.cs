@@ -10,6 +10,6 @@ namespace Chattahc
     public struct ChatRoom
     {
         public string name;
-        public List<string> memberIdList;
+        public HashSet<string> memberIdSet;
     }
 }
