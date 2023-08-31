@@ -1,3 +1,3 @@
-# toy_chatting
+# Chatting Program
 .net winform chatting application
  
