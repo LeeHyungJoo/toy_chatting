@@ -27,7 +27,15 @@ namespace Chattahc
             //TODO: 처음 입력 시 자동 PW 저장. 그리곤 질의하기. -> RDB로 관리하는게 좋을 것 같다. 
             Console.WriteLine($"redis connected : {connection.IsConnected}");
             var database = connection.GetDatabase();
-            database.StringSet($"CHATID:{chatId}", new RedisValue("-"));
+
+            var key = Util.GenerateChatIDRedisKey(chatId);
+            var result = database.StringGet(key);
+            int loginCount = 0;
+            if (!result.IsNull)
+            {
+                loginCount = int.Parse(result.ToString());
+            }
+            database.StringSet($"{key}", new RedisValue((++loginCount).ToString()));
             //
 
             Application.EnableVisualStyles();

@@ -16,6 +16,7 @@ namespace Chattahc
         public Dictionary<string, ChatRoom> chatRoomDict = new Dictionary<string, ChatRoom>();
 
         public string CurrentChatRoomKey { get; set; }
+      
 
         public int RoomCount()
         {
@@ -27,7 +28,7 @@ namespace Chattahc
             foreach (var mem in redis.SetMembers(userChatId))
             {
                 var roomKey = mem.ToString();
-                if (Util.Deserialize<ChatRoom>(redis.StringGet(Util.GenerateChatRoomRedisKey(roomKey))) is ChatRoom chatRoomData)
+                if (Util.Deserialize<ChatRoom>(redis.StringGet(Util.GenerateChatRoomInfoRedisKey(roomKey))) is ChatRoom chatRoomData)
                 {
                     chatRoomDict.Add(roomKey, chatRoomData);
                 }
@@ -41,12 +42,12 @@ namespace Chattahc
 
         public void MakeRoom(string roomName)
         {
-            var roomKey = $"{roomName}+{Util.GetTimeStampMS()}";
+            var roomKey = $"{roomName}+{Util.GetCurrentTimeStamp()}";
 
             var roomData = new ChatRoom() { name = roomKey, memberIdSet = new HashSet<string>() { Program.chatId } };
             chatRoomDict.Add(roomKey, roomData);
 
-            redis.StringSet(Util.GenerateChatRoomRedisKey(roomKey), new RedisValue(Util.Serialize(roomData)));
+            redis.StringSet(Util.GenerateChatRoomInfoRedisKey(roomKey), new RedisValue(Util.Serialize(roomData)));
             redis.SetAdd(Program.chatId, new RedisValue(roomKey));
         }
 
@@ -73,7 +74,7 @@ namespace Chattahc
         }
 
 
-        public void InviteToRoom(string targetChatId)
+        public void InviteToCurrentRoom(string targetChatId)
         {
             if (string.IsNullOrEmpty(CurrentChatRoomKey))
             {
@@ -85,8 +86,8 @@ namespace Chattahc
                 return;
             }
 
-            var result = redis.StringGet($"CHATID:{targetChatId}");
-            if (result == RedisValue.Null)
+            var result = redis.StringGet(Util.GenerateChatIDRedisKey(targetChatId));
+            if (result.IsNull)
             {
                 return;
             }
@@ -94,6 +95,33 @@ namespace Chattahc
 
             room.memberIdSet.Add(targetChatId);
             redis.SetAdd(targetChatId, new RedisValue(room.name));
+        }
+
+        public void SendMessageToRoom(string message)
+        {
+            string data_str = $"{Program.chatId}+{message}";
+
+            var push = new SortedSetEntry[1];
+            push[0] = new SortedSetEntry (new RedisValue(data_str), Util.GetCurrentTimeStamp());
+            redis.SortedSetAdd(Util.GenerateChatRoomDataRedisKey(CurrentChatRoomKey), push);
+        }
+
+        public List<KeyValuePair<string, string>> GetMessageFromCurrentRoom()
+        {
+            var messageList = new List<KeyValuePair<string, string>>();
+
+            var ret = redis.SortedSetRangeByScore(Util.GenerateChatRoomDataRedisKey(CurrentChatRoomKey));
+            ret.ToList().ForEach(item =>
+            {
+                var str = item.ToString();
+                var caret = str.IndexOf('+');
+                var sender = str.Substring(0, caret);
+                var msg = str.Substring(caret + 1);
+
+                messageList.Add(new KeyValuePair<string, string>(sender, msg));
+            });
+
+            return messageList;
         }
     }
 }

@@ -66,17 +66,12 @@ namespace Chattahc
             chatManager.MakeRoom(txtbox_makeroom.Text);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void bt_chatroom_Click(object sender, EventArgs e)
         {
             if (sender is Button chatBtn)
             {
                 chatManager.CurrentChatRoomKey = chatBtn.Name;
-                //주고받은 대화 가져오기. 
+                UpdateChatroomMessage();
             }
         }
 
@@ -90,10 +85,28 @@ namespace Chattahc
         {
             //TODO : 새로운 Dialog 를 통해서, 특정 Id 탐색 후 추가 해야함. 
             //TEST
-            chatManager.InviteToRoom("Yaral2");
-            chatManager.InviteToRoom("Yaral3");
-            chatManager.InviteToRoom("Yaral4");
+            chatManager.InviteToCurrentRoom("Yaral");
+            chatManager.InviteToCurrentRoom("Yaral2");
+            chatManager.InviteToCurrentRoom("Yaral3");
+            chatManager.InviteToCurrentRoom("Yaral4");
         }
 
+
+        private void send_message_Click(object sender, EventArgs e)
+        {
+            chatManager.SendMessageToRoom(tb_chatsend.Text);
+            UpdateChatroomMessage();
+
+        }
+
+        private void UpdateChatroomMessage()
+        {
+            txtbox_chat.Text = String.Empty;
+            foreach (var textitem in chatManager.GetMessageFromCurrentRoom())
+            {
+                txtbox_chat.Text += ($"[{textitem.Key}] : {textitem.Value}");
+                txtbox_chat.Text += "\r\n";
+            }
+        }
     }
 }

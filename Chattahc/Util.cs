@@ -7,7 +7,11 @@ namespace Chattahc
 {
     public static class Util
     {
-        public static long GetTimeStampMS() => DateTime.UtcNow.Ticks;
+        public static long GetCurrentTimeStamp()
+        {
+            DateTime dt = DateTime.Now;
+            return ((DateTimeOffset)dt).ToUnixTimeSeconds();
+        }
 
         public static object Deserialize<T>(string s) where T : struct
         {
@@ -26,6 +30,8 @@ namespace Chattahc
             }
         }
 
-        public static RedisKey GenerateChatRoomRedisKey(string roomKey) => new RedisKey("CHATROOM:" + roomKey);
+        public static RedisKey GenerateChatIDRedisKey(string chatId) => new RedisKey($"CHATID:{chatId}");
+        public static RedisKey GenerateChatRoomInfoRedisKey(string roomKey) => new RedisKey($"CHATROOMINFO:{roomKey}");
+        public static RedisKey GenerateChatRoomDataRedisKey(string roomKey) => new RedisKey($"CHATROOMDATA:{roomKey}");
     }
 }

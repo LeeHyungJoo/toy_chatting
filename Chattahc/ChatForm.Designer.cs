@@ -218,13 +218,13 @@ namespace Chattahc
             // 
             // bt_chatsend
             // 
-            this.bt_chatsend.Location = new System.Drawing.Point(262, 4);
+            this.bt_chatsend.Location = new System.Drawing.Point(261, 4);
             this.bt_chatsend.Name = "bt_chatsend";
             this.bt_chatsend.Size = new System.Drawing.Size(51, 34);
             this.bt_chatsend.TabIndex = 0;
             this.bt_chatsend.Text = "Send";
             this.bt_chatsend.UseVisualStyleBackColor = true;
-            this.bt_chatsend.Click += new System.EventHandler(this.button2_Click);
+            this.bt_chatsend.Click += new System.EventHandler(this.send_message_Click);
             // 
             // lb_myid
             // 
