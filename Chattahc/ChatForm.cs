@@ -67,7 +67,9 @@ namespace Chattahc
         private void btn_makeRoom_Click(object sender, EventArgs e)
         {
             if (txtb_roomName.Text == string.Empty)
+            {
                 return;
+            }
 
             chatManager.MakeRoom(txtb_roomName.Text);
             txtb_roomName.ResetText();
@@ -96,7 +98,9 @@ namespace Chattahc
         private void btn_sendMessage_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(chatManager.CurrentChatRoomKey))
+            {
                 return;
+            }
 
             chatManager.SendMessageToRoom(txtb_sendMessage.Text);
             UpdateChatroomMessage();
@@ -106,7 +110,9 @@ namespace Chattahc
         private void UpdateChatroomMessage()
         {
             if (string.IsNullOrEmpty(chatManager.CurrentChatRoomKey))
+            {
                 return;
+            }
 
             txtb_chatContents.ResetText();
             foreach (var textitem in chatManager.GetMessageFromCurrentRoom())
