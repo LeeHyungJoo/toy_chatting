@@ -34,22 +34,22 @@ namespace Chattahc
             this.pn_chatreq = new System.Windows.Forms.Panel();
             this.lb_makeRoom = new System.Windows.Forms.Label();
             this.txtb_roomName = new System.Windows.Forms.TextBox();
-            this.bt_makeRoom = new System.Windows.Forms.Button();
+            this.btn_makeRoom = new System.Windows.Forms.Button();
             this.pn_chat = new System.Windows.Forms.Panel();
             this.txtb_chatContents = new System.Windows.Forms.TextBox();
             this.stripmenu_chatRoom = new System.Windows.Forms.MenuStrip();
             this.stripmenu_chatRoom_setting = new System.Windows.Forms.ToolStripMenuItem();
-            this.stripmenu_setting_maxmembers = new System.Windows.Forms.ToolStripMenuItem();
-            this.stripmenu_member = new System.Windows.Forms.ToolStripMenuItem();
-            this.stripmenu_member_invite = new System.Windows.Forms.ToolStripMenuItem();
-            this.stripmenu_member_ban = new System.Windows.Forms.ToolStripMenuItem();
+            this.stripmenu_chatRoom_setting_maxmembers = new System.Windows.Forms.ToolStripMenuItem();
+            this.stripmenu_chatRoom_member = new System.Windows.Forms.ToolStripMenuItem();
+            this.stripmenu_chatRoom_member_invite = new System.Windows.Forms.ToolStripMenuItem();
+            this.stripmenu_chatRoom_member_ban = new System.Windows.Forms.ToolStripMenuItem();
             this.lb_chatRoom = new System.Windows.Forms.Label();
             this.pn_chatList = new System.Windows.Forms.Panel();
             this.flpn_chatList = new System.Windows.Forms.FlowLayoutPanel();
             this.lb_chatList = new System.Windows.Forms.Label();
             this.pn_chatsend = new System.Windows.Forms.Panel();
-            this.tb_chatsend = new System.Windows.Forms.TextBox();
-            this.bt_chatsend = new System.Windows.Forms.Button();
+            this.txtb_sendMessage = new System.Windows.Forms.TextBox();
+            this.btn_sendMessage = new System.Windows.Forms.Button();
             this.lb_myId = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
@@ -65,7 +65,7 @@ namespace Chattahc
             // 
             this.pn_chatreq.Controls.Add(this.lb_makeRoom);
             this.pn_chatreq.Controls.Add(this.txtb_roomName);
-            this.pn_chatreq.Controls.Add(this.bt_makeRoom);
+            this.pn_chatreq.Controls.Add(this.btn_makeRoom);
             this.pn_chatreq.Location = new System.Drawing.Point(4, 23);
             this.pn_chatreq.Name = "pn_chatreq";
             this.pn_chatreq.Size = new System.Drawing.Size(219, 47);
@@ -86,17 +86,17 @@ namespace Chattahc
             this.txtb_roomName.Name = "txtb_roomName";
             this.txtb_roomName.Size = new System.Drawing.Size(156, 21);
             this.txtb_roomName.TabIndex = 1;
-            this.txtb_roomName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_makeroom_keydown_Click);
+            this.txtb_roomName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtb_roomName_KeyDown);
             // 
-            // bt_makeRoom
+            // btn_makeRoom
             // 
-            this.bt_makeRoom.Location = new System.Drawing.Point(166, 20);
-            this.bt_makeRoom.Name = "bt_makeRoom";
-            this.bt_makeRoom.Size = new System.Drawing.Size(50, 21);
-            this.bt_makeRoom.TabIndex = 0;
-            this.bt_makeRoom.Text = "Req";
-            this.bt_makeRoom.UseVisualStyleBackColor = true;
-            this.bt_makeRoom.Click += new System.EventHandler(this.bt_makeroom_Click);
+            this.btn_makeRoom.Location = new System.Drawing.Point(166, 20);
+            this.btn_makeRoom.Name = "btn_makeRoom";
+            this.btn_makeRoom.Size = new System.Drawing.Size(50, 21);
+            this.btn_makeRoom.TabIndex = 0;
+            this.btn_makeRoom.Text = "Req";
+            this.btn_makeRoom.UseVisualStyleBackColor = true;
+            this.btn_makeRoom.Click += new System.EventHandler(this.btn_makeRoom_Click);
             // 
             // pn_chat
             // 
@@ -122,7 +122,7 @@ namespace Chattahc
             this.stripmenu_chatRoom.GripMargin = new System.Windows.Forms.Padding(2);
             this.stripmenu_chatRoom.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.stripmenu_chatRoom_setting,
-            this.stripmenu_member});
+            this.stripmenu_chatRoom_member});
             this.stripmenu_chatRoom.Location = new System.Drawing.Point(0, 0);
             this.stripmenu_chatRoom.Name = "stripmenu_chatRoom";
             this.stripmenu_chatRoom.Size = new System.Drawing.Size(312, 24);
@@ -132,38 +132,38 @@ namespace Chattahc
             // stripmenu_chatRoom_setting
             // 
             this.stripmenu_chatRoom_setting.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.stripmenu_setting_maxmembers});
+            this.stripmenu_chatRoom_setting_maxmembers});
             this.stripmenu_chatRoom_setting.Name = "stripmenu_chatRoom_setting";
             this.stripmenu_chatRoom_setting.Size = new System.Drawing.Size(57, 20);
             this.stripmenu_chatRoom_setting.Text = "Setting";
             // 
-            // stripmenu_setting_maxmembers
+            // stripmenu_chatRoom_setting_maxmembers
             // 
-            this.stripmenu_setting_maxmembers.Name = "stripmenu_setting_maxmembers";
-            this.stripmenu_setting_maxmembers.Size = new System.Drawing.Size(180, 22);
-            this.stripmenu_setting_maxmembers.Text = "Max Memebers...";
+            this.stripmenu_chatRoom_setting_maxmembers.Name = "stripmenu_chatRoom_setting_maxmembers";
+            this.stripmenu_chatRoom_setting_maxmembers.Size = new System.Drawing.Size(180, 22);
+            this.stripmenu_chatRoom_setting_maxmembers.Text = "Max Memebers...";
             // 
-            // stripmenu_member
+            // stripmenu_chatRoom_member
             // 
-            this.stripmenu_member.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.stripmenu_member_invite,
-            this.stripmenu_member_ban});
-            this.stripmenu_member.Name = "stripmenu_member";
-            this.stripmenu_member.Size = new System.Drawing.Size(64, 20);
-            this.stripmenu_member.Text = "Member";
+            this.stripmenu_chatRoom_member.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stripmenu_chatRoom_member_invite,
+            this.stripmenu_chatRoom_member_ban});
+            this.stripmenu_chatRoom_member.Name = "stripmenu_chatRoom_member";
+            this.stripmenu_chatRoom_member.Size = new System.Drawing.Size(64, 20);
+            this.stripmenu_chatRoom_member.Text = "Member";
             // 
-            // stripmenu_member_invite
+            // stripmenu_chatRoom_member_invite
             // 
-            this.stripmenu_member_invite.Name = "stripmenu_member_invite";
-            this.stripmenu_member_invite.Size = new System.Drawing.Size(180, 22);
-            this.stripmenu_member_invite.Text = "Invite..";
-            this.stripmenu_member_invite.Click += new System.EventHandler(this.stripmenu_member_invite_Click);
+            this.stripmenu_chatRoom_member_invite.Name = "stripmenu_chatRoom_member_invite";
+            this.stripmenu_chatRoom_member_invite.Size = new System.Drawing.Size(180, 22);
+            this.stripmenu_chatRoom_member_invite.Text = "Invite..";
+            this.stripmenu_chatRoom_member_invite.Click += new System.EventHandler(this.stripmenu_member_invite_Click);
             // 
-            // stripmenu_member_ban
+            // stripmenu_chatRoom_member_ban
             // 
-            this.stripmenu_member_ban.Name = "stripmenu_member_ban";
-            this.stripmenu_member_ban.Size = new System.Drawing.Size(180, 22);
-            this.stripmenu_member_ban.Text = "Ban...";
+            this.stripmenu_chatRoom_member_ban.Name = "stripmenu_chatRoom_member_ban";
+            this.stripmenu_chatRoom_member_ban.Size = new System.Drawing.Size(180, 22);
+            this.stripmenu_chatRoom_member_ban.Text = "Ban...";
             // 
             // lb_chatRoom
             // 
@@ -202,32 +202,32 @@ namespace Chattahc
             // 
             // pn_chatsend
             // 
-            this.pn_chatsend.Controls.Add(this.tb_chatsend);
-            this.pn_chatsend.Controls.Add(this.bt_chatsend);
+            this.pn_chatsend.Controls.Add(this.txtb_sendMessage);
+            this.pn_chatsend.Controls.Add(this.btn_sendMessage);
             this.pn_chatsend.Location = new System.Drawing.Point(229, 515);
             this.pn_chatsend.Name = "pn_chatsend";
             this.pn_chatsend.Size = new System.Drawing.Size(312, 45);
             this.pn_chatsend.TabIndex = 3;
             // 
-            // tb_chatsend
+            // txtb_sendMessage
             // 
-            this.tb_chatsend.Location = new System.Drawing.Point(9, 4);
-            this.tb_chatsend.Multiline = true;
-            this.tb_chatsend.Name = "tb_chatsend";
-            this.tb_chatsend.Size = new System.Drawing.Size(249, 34);
-            this.tb_chatsend.TabIndex = 1;
-            this.tb_chatsend.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_chatsend_keydown_Click);
-            this.tb_chatsend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ignore_enter_Click);
+            this.txtb_sendMessage.Location = new System.Drawing.Point(9, 4);
+            this.txtb_sendMessage.Multiline = true;
+            this.txtb_sendMessage.Name = "txtb_sendMessage";
+            this.txtb_sendMessage.Size = new System.Drawing.Size(249, 34);
+            this.txtb_sendMessage.TabIndex = 1;
+            this.txtb_sendMessage.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtb_sendMessage_KeyDown);
+            this.txtb_sendMessage.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ignore_enter_KeyPress);
             // 
-            // bt_chatsend
+            // btn_sendMessage
             // 
-            this.bt_chatsend.Location = new System.Drawing.Point(261, 4);
-            this.bt_chatsend.Name = "bt_chatsend";
-            this.bt_chatsend.Size = new System.Drawing.Size(51, 34);
-            this.bt_chatsend.TabIndex = 0;
-            this.bt_chatsend.Text = "Send";
-            this.bt_chatsend.UseVisualStyleBackColor = true;
-            this.bt_chatsend.Click += new System.EventHandler(this.send_message_Click);
+            this.btn_sendMessage.Location = new System.Drawing.Point(261, 4);
+            this.btn_sendMessage.Name = "btn_sendMessage";
+            this.btn_sendMessage.Size = new System.Drawing.Size(51, 34);
+            this.btn_sendMessage.TabIndex = 0;
+            this.btn_sendMessage.Text = "Send";
+            this.btn_sendMessage.UseVisualStyleBackColor = true;
+            this.btn_sendMessage.Click += new System.EventHandler(this.btn_sendMessage_Click);
             // 
             // lb_myId
             // 
@@ -282,12 +282,12 @@ namespace Chattahc
 
         private System.Windows.Forms.Panel pn_chatreq;
         private System.Windows.Forms.TextBox txtb_roomName;
-        private System.Windows.Forms.Button bt_makeRoom;
+        private System.Windows.Forms.Button btn_makeRoom;
         private System.Windows.Forms.Panel pn_chat;
         private System.Windows.Forms.Panel pn_chatList;
         private System.Windows.Forms.Panel pn_chatsend;
-        private System.Windows.Forms.TextBox tb_chatsend;
-        private System.Windows.Forms.Button bt_chatsend;
+        private System.Windows.Forms.TextBox txtb_sendMessage;
+        private System.Windows.Forms.Button btn_sendMessage;
         private System.Windows.Forms.Label lb_makeRoom;
         private System.Windows.Forms.Label lb_chatRoom;
         private System.Windows.Forms.Label lb_chatList;
@@ -299,10 +299,10 @@ namespace Chattahc
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.MenuStrip stripmenu_chatRoom;
         private System.Windows.Forms.ToolStripMenuItem stripmenu_chatRoom_setting;
-        private System.Windows.Forms.ToolStripMenuItem stripmenu_setting_maxmembers;
-        private System.Windows.Forms.ToolStripMenuItem stripmenu_member;
-        private System.Windows.Forms.ToolStripMenuItem stripmenu_member_ban;
-        private System.Windows.Forms.ToolStripMenuItem stripmenu_member_invite;
+        private System.Windows.Forms.ToolStripMenuItem stripmenu_chatRoom_setting_maxmembers;
+        private System.Windows.Forms.ToolStripMenuItem stripmenu_chatRoom_member;
+        private System.Windows.Forms.ToolStripMenuItem stripmenu_chatRoom_member_ban;
+        private System.Windows.Forms.ToolStripMenuItem stripmenu_chatRoom_member_invite;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
     }
 }

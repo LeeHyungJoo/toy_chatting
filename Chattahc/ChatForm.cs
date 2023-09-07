@@ -45,7 +45,7 @@ namespace Chattahc
         {
             if (CheckRoomListUpdate())
             {
-                var toAddBtnList = chatManager.GetToAddChatRoomBtns(chatRoomBtnDict.Keys.ToList(), new EventHandler(bt_chatroom_Click));
+                var toAddBtnList = chatManager.GetToAddChatRoomBtns(chatRoomBtnDict.Keys.ToList(), new EventHandler(btn_chatRoom_Click));
 
                 foreach (var btn in toAddBtnList)
                 {
@@ -58,7 +58,13 @@ namespace Chattahc
             txtb_chatContents.Enabled = ChatContextEnabled();
         }
 
-        private void bt_makeroom_Click(object sender, EventArgs e)
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            Program.connection.Close();
+        }
+
+        private void btn_makeRoom_Click(object sender, EventArgs e)
         {
             if (txtb_roomName.Text == string.Empty)
                 return;
@@ -67,7 +73,7 @@ namespace Chattahc
             txtb_roomName.ResetText();
         }
 
-        private void bt_chatroom_Click(object sender, EventArgs e)
+        private void btn_chatRoom_Click(object sender, EventArgs e)
         {
             if (sender is Button chatBtn)
             {
@@ -76,34 +82,25 @@ namespace Chattahc
             }
         }
 
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            Program.connection.Close();
-        }
-
         private void stripmenu_member_invite_Click(object sender, EventArgs e)
         {
             using (var secondForm = new InviteMemberForm())
             {
-                DialogResult result = secondForm.ShowDialog();
-
-                if (result == DialogResult.OK)
+                if (secondForm.ShowDialog() == DialogResult.OK)
                 {
                     chatManager.InviteToCurrentRoom(secondForm.ChatIDToInvite);
                 }
             }
         }
 
-
-        private void send_message_Click(object sender, EventArgs e)
+        private void btn_sendMessage_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(chatManager.CurrentChatRoomKey))
                 return;
 
-            chatManager.SendMessageToRoom(tb_chatsend.Text);
+            chatManager.SendMessageToRoom(txtb_sendMessage.Text);
             UpdateChatroomMessage();
-            tb_chatsend.ResetText();
+            txtb_sendMessage.ResetText();
         }
 
         private void UpdateChatroomMessage()
@@ -118,7 +115,7 @@ namespace Chattahc
                 txtb_chatContents.Text += "\r\n";
             }
         }
-        private void ignore_enter_Click(object sender, KeyPressEventArgs e)
+        private void ignore_enter_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == (char)Keys.Enter)
             {
@@ -126,27 +123,27 @@ namespace Chattahc
             }
         }
 
-        private void tb_chatsend_keydown_Click(object sender, KeyEventArgs e)
+        private void txtb_sendMessage_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
                 if (e.Modifiers == Keys.Shift)
                 {
-                    tb_chatsend.SelectedText += "\r\n";
+                    txtb_sendMessage.SelectedText += "\r\n";
                 }
                 else
                 {
-                    send_message_Click(sender, new EventArgs());
+                    btn_sendMessage_Click(sender, new EventArgs());
                 }
                 e.Handled = true;
             }
         }
 
-        private void tb_makeroom_keydown_Click(object sender, KeyEventArgs e)
+        private void txtb_roomName_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                bt_makeroom_Click(sender, e);
+                btn_makeRoom_Click(sender, e);
                 e.Handled = true;
             }
         }
