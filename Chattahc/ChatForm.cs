@@ -22,7 +22,7 @@ namespace Chattahc
         public ChatForm()
         {
             InitializeComponent();
-            lb_myid.Text = Program.chatId + " - Chatting room";
+            lb_myId.Text = Program.chatId + " - Chatting room";
 
             timer.Interval = 250;
             timer.Tick += Update;
@@ -52,19 +52,19 @@ namespace Chattahc
                     chatRoomBtnDict.Add(btn.Name, btn);
                 }
 
-                flp_chatlist.Controls.AddRange(toAddBtnList.ToArray());
+                flpn_chatList.Controls.AddRange(toAddBtnList.ToArray());
             }
 
-            txtbox_chat.Enabled = ChatContextEnabled();
+            txtb_chatContents.Enabled = ChatContextEnabled();
         }
 
         private void bt_makeroom_Click(object sender, EventArgs e)
         {
-            if (txtbox_makeroom.Text == string.Empty)
+            if (txtb_roomName.Text == string.Empty)
                 return;
 
-            chatManager.MakeRoom(txtbox_makeroom.Text);
-            txtbox_makeroom.ResetText();
+            chatManager.MakeRoom(txtb_roomName.Text);
+            txtb_roomName.ResetText();
         }
 
         private void bt_chatroom_Click(object sender, EventArgs e)
@@ -111,11 +111,11 @@ namespace Chattahc
             if (string.IsNullOrEmpty(chatManager.CurrentChatRoomKey))
                 return;
 
-            txtbox_chat.ResetText();
+            txtb_chatContents.ResetText();
             foreach (var textitem in chatManager.GetMessageFromCurrentRoom())
             {
-                txtbox_chat.Text += ($"[{textitem.Key}] : {textitem.Value}");
-                txtbox_chat.Text += "\r\n";
+                txtb_chatContents.Text += ($"[{textitem.Key}] : {textitem.Value}");
+                txtb_chatContents.Text += "\r\n";
             }
         }
         private void ignore_enter_Click(object sender, KeyPressEventArgs e)
