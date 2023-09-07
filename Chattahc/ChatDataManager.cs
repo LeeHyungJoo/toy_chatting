@@ -17,7 +17,6 @@ namespace Chattahc
 
         public string CurrentChatRoomKey { get; set; }
       
-
         public int RoomCount()
         {
             return chatRoomDict.Count;
@@ -31,10 +30,6 @@ namespace Chattahc
                 if (Util.Deserialize<ChatRoom>(redis.StringGet(Util.GenerateChatRoomInfoRedisKey(roomKey))) is ChatRoom chatRoomData)
                 {
                     chatRoomDict.Add(roomKey, chatRoomData);
-                }
-                else
-                {
-                    Console.WriteLine("Parsing Failed");
                 }
             }
         }
@@ -92,7 +87,6 @@ namespace Chattahc
                 return;
             }
 
-
             room.memberIdSet.Add(targetChatId);
             redis.SetAdd(targetChatId, new RedisValue(room.name));
         }
@@ -100,9 +94,8 @@ namespace Chattahc
         public void SendMessageToRoom(string message)
         {
             string data_str = $"{Program.chatId}+{message}";
+            var push = new SortedSetEntry[1] { new SortedSetEntry(new RedisValue(data_str), Util.GetCurrentTimeStamp()) };
 
-            var push = new SortedSetEntry[1];
-            push[0] = new SortedSetEntry (new RedisValue(data_str), Util.GetCurrentTimeStamp());
             redis.SortedSetAdd(Util.GenerateChatRoomDataRedisKey(CurrentChatRoomKey), push);
         }
 
