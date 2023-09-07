@@ -62,3 +62,7 @@ C:\Users\prism9411\Documents\GitHub\Chattahc\Chattahc\obj\Debug\Chattahc.pdb
 C:\Users\prism9411\Documents\GitHub\Chattahc\Chattahc\obj\Debug\Chattahc.ChatForm.resources
 C:\Users\prism9411\Documents\GitHub\Chattahc\Chattahc\obj\Debug\Chattahc.InviteMemberForm.resources
 C:\Users\prism9411\Documents\GitHub\Chattahc\Chattahc\obj\Debug\Chattahc.csproj.AssemblyReference.cache
+C:\Users\prism9411\Documents\GitHub\Chattahc\Chattahc\bin\Debug\Chattahc.exe.manifest
+C:\Users\prism9411\Documents\GitHub\Chattahc\Chattahc\bin\Debug\Chattahc.application
+C:\Users\prism9411\Documents\GitHub\Chattahc\Chattahc\obj\Debug\Chattahc.exe.manifest
+C:\Users\prism9411\Documents\GitHub\Chattahc\Chattahc\obj\Debug\Chattahc.application

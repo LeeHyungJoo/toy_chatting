@@ -86,6 +86,7 @@ namespace Chattahc
             this.txtbox_makeroom.Name = "txtbox_makeroom";
             this.txtbox_makeroom.Size = new System.Drawing.Size(156, 21);
             this.txtbox_makeroom.TabIndex = 1;
+            this.txtbox_makeroom.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_makeroom_keydown_Click);
             // 
             // bt_makeroom
             // 
@@ -215,6 +216,8 @@ namespace Chattahc
             this.tb_chatsend.Name = "tb_chatsend";
             this.tb_chatsend.Size = new System.Drawing.Size(249, 34);
             this.tb_chatsend.TabIndex = 1;
+            this.tb_chatsend.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tb_chatsend_keydown_Click);
+            this.tb_chatsend.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.ignore_enter_Click);
             // 
             // bt_chatsend
             // 

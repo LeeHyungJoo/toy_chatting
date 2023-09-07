@@ -9,42 +9,43 @@ namespace Chattahc
 
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.txtbox_invite = new System.Windows.Forms.TextBox();
+            this.lb_invite = new System.Windows.Forms.Label();
+            this.bt_invite = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtbox_invite
             // 
-            this.textBox1.Location = new System.Drawing.Point(104, 26);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 21);
-            this.textBox1.TabIndex = 0;
+            this.txtbox_invite.Location = new System.Drawing.Point(77, 29);
+            this.txtbox_invite.Name = "txtbox_invite";
+            this.txtbox_invite.Size = new System.Drawing.Size(127, 21);
+            this.txtbox_invite.TabIndex = 0;
             // 
-            // label1
+            // lb_invite
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(60, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 12);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
+            this.lb_invite.AutoSize = true;
+            this.lb_invite.Location = new System.Drawing.Point(25, 32);
+            this.lb_invite.Name = "lb_invite";
+            this.lb_invite.Size = new System.Drawing.Size(46, 12);
+            this.lb_invite.TabIndex = 1;
+            this.lb_invite.Text = "Chat ID";
             // 
-            // button1
+            // bt_invite
             // 
-            this.button1.Location = new System.Drawing.Point(82, 72);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.bt_invite.Location = new System.Drawing.Point(77, 72);
+            this.bt_invite.Name = "bt_invite";
+            this.bt_invite.Size = new System.Drawing.Size(75, 23);
+            this.bt_invite.TabIndex = 2;
+            this.bt_invite.Text = "Invite";
+            this.bt_invite.UseVisualStyleBackColor = true;
+            this.bt_invite.Click += new System.EventHandler(this.member_invite_Click);
             // 
             // InviteMemberForm
             // 
             this.ClientSize = new System.Drawing.Size(240, 107);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.bt_invite);
+            this.Controls.Add(this.lb_invite);
+            this.Controls.Add(this.txtbox_invite);
             this.Name = "InviteMemberForm";
             this.Load += new System.EventHandler(this.InviteMemberForm_Load);
             this.ResumeLayout(false);
@@ -52,8 +53,8 @@ namespace Chattahc
 
         }
 
-        private TextBox textBox1;
-        private Label label1;
-        private Button button1;
+        private TextBox txtbox_invite;
+        private Label lb_invite;
+        private Button bt_invite;
     }
 }

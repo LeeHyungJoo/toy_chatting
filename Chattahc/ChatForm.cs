@@ -64,6 +64,7 @@ namespace Chattahc
                 return;
 
             chatManager.MakeRoom(txtbox_makeroom.Text);
+            txtbox_makeroom.ResetText();
         }
 
         private void bt_chatroom_Click(object sender, EventArgs e)
@@ -83,29 +84,70 @@ namespace Chattahc
 
         private void stripmenu_member_invite_Click(object sender, EventArgs e)
         {
-            //TODO : 새로운 Dialog 를 통해서, 특정 Id 탐색 후 추가 해야함. 
-            //TEST
-            chatManager.InviteToCurrentRoom("Yaral");
-            chatManager.InviteToCurrentRoom("Yaral2");
-            chatManager.InviteToCurrentRoom("Yaral3");
-            chatManager.InviteToCurrentRoom("Yaral4");
+            using (var secondForm = new InviteMemberForm())
+            {
+                DialogResult result = secondForm.ShowDialog();
+
+                if (result == DialogResult.OK)
+                {
+                    chatManager.InviteToCurrentRoom(secondForm.ChatIDToInvite);
+                }
+            }
         }
 
 
         private void send_message_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(chatManager.CurrentChatRoomKey))
+                return;
+
             chatManager.SendMessageToRoom(tb_chatsend.Text);
             UpdateChatroomMessage();
-
+            tb_chatsend.ResetText();
         }
 
         private void UpdateChatroomMessage()
         {
-            txtbox_chat.Text = String.Empty;
+            if (string.IsNullOrEmpty(chatManager.CurrentChatRoomKey))
+                return;
+
+            txtbox_chat.ResetText();
             foreach (var textitem in chatManager.GetMessageFromCurrentRoom())
             {
                 txtbox_chat.Text += ($"[{textitem.Key}] : {textitem.Value}");
                 txtbox_chat.Text += "\r\n";
+            }
+        }
+        private void ignore_enter_Click(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void tb_chatsend_keydown_Click(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (e.Modifiers == Keys.Shift)
+                {
+                    tb_chatsend.SelectedText += "\r\n";
+                }
+                else
+                {
+                    send_message_Click(sender, new EventArgs());
+                }
+                e.Handled = true;
+            }
+        }
+
+        private void tb_makeroom_keydown_Click(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bt_makeroom_Click(sender, e);
+                e.Handled = true;
             }
         }
     }
